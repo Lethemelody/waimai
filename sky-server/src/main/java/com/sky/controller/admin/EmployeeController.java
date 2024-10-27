@@ -116,4 +116,31 @@ public class EmployeeController {
         employeeService.startOrStop(status,id);
         return Result.success();
     }
+
+    /**
+     * 根据id查询用户信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工信息")
+    public Result<Employee> getById(@PathVariable Long id){
+        log.info("查询的员工id为{}",id);
+        Employee employee = employeeService.getById(id);
+        employee.setPassword("*****");
+        return Result.success(employee);
+    }
+
+    /**
+     * 修改员工信息
+     * @param employee
+     * @return
+     */
+    @PutMapping()
+    @ApiOperation("修改员工信息")
+    public Result updateEmployee( @RequestBody EmployeeDTO employeeDTO){
+        log.info("修改的员工信息为{}",employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 }
