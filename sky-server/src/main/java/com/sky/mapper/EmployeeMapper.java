@@ -36,7 +36,7 @@ public interface EmployeeMapper {
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /**
-     * 更新账户状态
+     * 动态更新账户状态
      * @param employee
      */
     void update(Employee employee);
