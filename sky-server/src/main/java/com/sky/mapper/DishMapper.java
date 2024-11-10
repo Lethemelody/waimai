@@ -39,4 +39,12 @@ public interface DishMapper {
 
     @Select("select * from dish where id = #{id}")
     Dish getDishDetailById(Long id);
+
+    /**
+     * 动态条件查询菜品
+     *
+     * @param dish
+     * @return
+     */
+    List<Dish> list(Dish dish);
 }
