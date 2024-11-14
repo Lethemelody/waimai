@@ -50,6 +50,15 @@ public interface DishMapper {
     List<Dish> list(Dish dish);
 
     /**
+     * 根据主键查询菜品
+     *
+     * @param id
+     * @return
+     */
+    @Select("select * from dish where id = #{id}")
+    Dish getById(Long id);
+
+    /**
      * 根据套餐id查询菜品
      * @param setmealId
      * @return
