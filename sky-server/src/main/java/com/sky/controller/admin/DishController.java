@@ -13,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class DishController {
 
     @PostMapping
     @ApiOperation("新增菜品")
+    @CacheEvict(cacheNames = "Dish",allEntries = true)
     public Result save(@RequestBody DishDTO dishDTO){
         log.info("新增菜品{}",dishDTO);
         dishService.saveWithFlavor(dishDTO);
@@ -46,6 +48,7 @@ public class DishController {
 
     @DeleteMapping
     @ApiOperation("可批量删除菜品")
+    @CacheEvict(cacheNames = "Dish",allEntries = true)
     public Result deleteDish(@RequestParam List<Long> ids){
         log.info("删除的菜品id集合：{}",ids);
         dishService.deleteBatch(ids);
@@ -54,6 +57,7 @@ public class DishController {
 
     @PostMapping("/status/{status}")
     @ApiOperation("修改菜品销售状态")
+    @CacheEvict(cacheNames = "Dish",allEntries = true)
     public Result modifyDishStatus(@PathVariable Integer status,Long id){
         log.info("修改的菜品为{}",id);
         dishService.UpdateStatus(status,id);
@@ -70,6 +74,7 @@ public class DishController {
 
     @PutMapping
     @ApiOperation("修改菜品详情")
+    @CacheEvict(cacheNames = "Dish",allEntries = true)
     public Result updateDishWithFlavor(@RequestBody DishDTO dishDTO){
         log.info("修改菜品的参数为：{}",dishDTO);
         dishService.updateDishWithFlavor(dishDTO);
